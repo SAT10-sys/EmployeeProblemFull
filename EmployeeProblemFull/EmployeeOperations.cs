@@ -8,23 +8,16 @@ namespace EmployeeProblemFull
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
-        string companyName;
-        int wagePerHour;
-        int numOfWorkingDays;
-        int maximumWorkingHours;
+        int numOfCompanies = 0;
+        Company[] companyList;
         public EmployeeOperations()
         {
-            companyName = "";
-            wagePerHour = 0;
-            numOfWorkingDays = 0;
-            maximumWorkingHours = 0;
+            companyList = new Company[5];
         }
-        public EmployeeOperations(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours)
+        public void AddCompanyToArray(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours)
         {
-            this.companyName = companyName;
-            this.wagePerHour = wagePerHour;
-            this.numOfWorkingDays = numOfWorkingDays;
-            this.maximumWorkingHours = maximumWorkingHours;
+            companyList[numOfCompanies] = new Company(companyName, wagePerHour, numOfWorkingDays, maximumWorkingHours);
+            numOfCompanies++;
         }
         public int GetEmployeeHours()
         {
@@ -49,20 +42,25 @@ namespace EmployeeProblemFull
             }
             return empHrs;
         }
-        public void ComputeWage()
+        public void GetWage()
+        {
+            for (int i = 0; i < numOfCompanies; i++)
+                companyList[i].SetEmpWage(ComputeWage(companyList[i]));
+        }
+        public int ComputeWage(Company company)
         {
             int empWage = 0;
             int totalEmpHours = 0;
             int i = 0;
-            while(i<numOfWorkingDays && totalEmpHours<=maximumWorkingHours)
+            while(i<company.numOfWorkingDays && totalEmpHours<=company.maximumWorkingHours)
             {
                 totalEmpHours = totalEmpHours + GetEmployeeHours();
                 i++;
             }
-            empWage = totalEmpHours * wagePerHour;
-            Console.WriteLine("Company Name: "+companyName+"\n");
+            empWage = totalEmpHours * company.wagePerHour;
+            Console.WriteLine("Company Name: "+company.companyName+"\n");
             Console.WriteLine("Total Hours worked: "+totalEmpHours+"\nMonthly Wage: "+empWage+"\n");
-
+            return empWage;
         }                            
     }
 }
