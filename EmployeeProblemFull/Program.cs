@@ -8,8 +8,8 @@ namespace EmployeeProblemFull
         {
             Console.WriteLine("Welcome to Employee Wage Management Problem");
             EmployeeOperations employeeOperations = new EmployeeOperations();
-            int totEmpHrs = employeeOperations.GetEmployeeHours();
-            employeeOperations.ComputeWage(totEmpHrs);
+            employeeOperations.ComputeWage("Reliance", 20, 25, 120);
+            employeeOperations.ComputeWage("Tata", 30, 25, 120);
         }
     }
 }

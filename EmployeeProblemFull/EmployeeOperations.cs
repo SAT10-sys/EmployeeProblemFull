@@ -8,46 +8,43 @@ namespace EmployeeProblemFull
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
-        public const int WAGE_PER_HOUR = 20;
-        public const int WORKING_DAYS_PER_MONTH = 20;
-        public const int TOTAL_WORKING_HOURS = 100;     
         public int GetEmployeeHours()
         {
             Random random = new Random();
-            int i = 0;
-            int totalEmpHours = 0;
-            int empHours = 0;
-            while(i<WORKING_DAYS_PER_MONTH && totalEmpHours<TOTAL_WORKING_HOURS)
+            int empCheck = random.Next(0, 3);
+            int empHrs = 0;
+            switch(empCheck)
             {
-                int empCheck = random.Next(0, 3);
-                switch(empCheck)
-                {
-                    case 0:
-                        Console.WriteLine("Employee is Absent");
-                        empHours = 0;
-                        break;
-                    case IS_PART_TIME:
-                        Console.WriteLine("Part time employee");
-                        empHours = 4;
-                        break;
-                    case IS_FULL_TIME:
-                        Console.WriteLine("Full time employee");
-                        empHours = 8;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid Result");
-                        break;
-                }
-                i++;
-                totalEmpHours = totalEmpHours + empHours;                
+                case 0:
+                    empHrs = 0;
+                    break;
+                case IS_PART_TIME:
+                    empHrs = 4;
+                    break;
+                case IS_FULL_TIME:
+                    empHrs = 8;
+                    break;
+                default:
+                    Console.WriteLine("Invalid entry");
+                    empHrs = 0;
+                    break;
             }
-            return totalEmpHours;
+            return empHrs;
         }
-        public void ComputeWage(int totalEmpHours)
+        public void ComputeWage(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours)
         {
             int empWage = 0;
-            empWage = totalEmpHours * WAGE_PER_HOUR;
-            Console.WriteLine("Total hours worked: "+totalEmpHours+"\nTotal wage for the month: "+empWage);
-        }
+            int totalEmpHours = 0;
+            int i = 0;
+            while(i<numOfWorkingDays && totalEmpHours<=maximumWorkingHours)
+            {
+                totalEmpHours = totalEmpHours + GetEmployeeHours();
+                i++;
+            }
+            empWage = totalEmpHours * wagePerHour;
+            Console.WriteLine("Company Name: "+companyName+"\n");
+            Console.WriteLine("Total Hours worked: "+totalEmpHours+"\nMonthly Wage: "+empWage+"\n");
+
+        }                            
     }
 }
