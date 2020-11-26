@@ -9,5 +9,6 @@ namespace EmployeeProblemFull
         public void AddCompanyToList(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours);
         public int GetEmployeeHours();
         public void GetWage();
+        public void GetWagesByCompany(string companyName);
     }
 }

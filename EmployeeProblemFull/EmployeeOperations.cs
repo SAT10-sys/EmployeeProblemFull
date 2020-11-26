@@ -10,14 +10,30 @@ namespace EmployeeProblemFull
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;    
         List<Company> companyList;
+        Dictionary<string, Company> dictionary = new Dictionary<string, Company>();
         public EmployeeOperations()
         {
             companyList = new List<Company>();
+            dictionary = new Dictionary<string, Company>();
         }
         public void AddCompanyToList(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours)
         {
             Company company = new Company(companyName, wagePerHour, numOfWorkingDays, maximumWorkingHours);
             companyList.Add(company);
+            dictionary.Add(companyName, company);
+        }
+        public void GetWagesByCompany(string companyName)
+        {
+            int totalWage;
+            try
+            {
+                totalWage = dictionary[companyName].totalEmpWage;
+                Console.WriteLine(totalWage);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }            
         }
         public int GetEmployeeHours()
         {

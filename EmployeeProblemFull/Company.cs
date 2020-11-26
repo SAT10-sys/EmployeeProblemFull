@@ -22,5 +22,9 @@ namespace EmployeeProblemFull
         {
             this.totalEmpWage = totalEmpWage;
         }
+        public void DisplayWage()
+        {
+            Console.WriteLine("Total wage for company "+companyName+" is "+totalEmpWage);
+        }
     }
 }
