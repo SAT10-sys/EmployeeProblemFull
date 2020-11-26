@@ -11,10 +11,12 @@ namespace EmployeeProblemFull
             const int IS_PART_TIME = 1;
             const int WAGE_PER_HOUR=20;
             const int NUMBER_OF_WORKING_DAYS_PER_MONTH = 20;
-            Random random = new Random();
-            int empCheck = random.Next(0, 3); //generates a random number between 0 and 2 where 0 is inclusive but 2 is exclusive
+            const int MAXIMUM_WORKING_HOURS = 100;
+            Random random = new Random();            
             int empHours = 0;
             int empWage = 0;
+            int totalEmpHrs = 0;
+            int i = 0;
             /*
             // UC1_Checking for attendance
             if(empCheck==IS_FULL_TIME)
@@ -44,8 +46,9 @@ namespace EmployeeProblemFull
             }*/
 
             //UC 5 calculate monthly wages
-            for (int i = 1; i <= NUMBER_OF_WORKING_DAYS_PER_MONTH; i++)
+            while(i<NUMBER_OF_WORKING_DAYS_PER_MONTH && totalEmpHrs<MAXIMUM_WORKING_HOURS)
             {
+                int empCheck = random.Next(0, 3); //generates a random number between 0 and 3 where 0 is inclusive but 2 is exclusive
                 //UC4 Implemented Using Switch Case
                 switch (empCheck)
                 {
@@ -65,9 +68,11 @@ namespace EmployeeProblemFull
                         Console.WriteLine("Invalid Entry");
                         break;
                 }
-                empWage = empWage + (empHours * WAGE_PER_HOUR);
+                i++;
+                totalEmpHrs = totalEmpHrs + empHours;
             }
-            Console.WriteLine("Monthly wages: " + empWage);
+            empWage = totalEmpHrs * WAGE_PER_HOUR;
+            Console.WriteLine("Total hours worked: "+totalEmpHrs+"\nMonthly wages: " + empWage);
         }
     }
 }
