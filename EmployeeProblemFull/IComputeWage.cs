@@ -6,7 +6,7 @@ namespace EmployeeProblemFull
 {
     public interface IComputeWage
     {
-        public void AddCompanyToArray(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours);
+        public void AddCompanyToList(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours);
         public int GetEmployeeHours();
         public void GetWage();
     }

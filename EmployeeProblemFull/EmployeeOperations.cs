@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections;
 
 namespace EmployeeProblemFull
 {
     public class EmployeeOperations:IComputeWage
     {
         public const int IS_PART_TIME = 1;
-        public const int IS_FULL_TIME = 2;
-        int numOfCompanies = 0;
-        Company[] companyList;
+        public const int IS_FULL_TIME = 2;    
+        List<Company> companyList;
         public EmployeeOperations()
         {
-            companyList = new Company[5];
+            companyList = new List<Company>();
         }
-        public void AddCompanyToArray(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours)
+        public void AddCompanyToList(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours)
         {
-            companyList[numOfCompanies] = new Company(companyName, wagePerHour, numOfWorkingDays, maximumWorkingHours);
-            numOfCompanies++;
+            Company company = new Company(companyName, wagePerHour, numOfWorkingDays, maximumWorkingHours);
+            companyList.Add(company);
         }
         public int GetEmployeeHours()
         {
@@ -44,7 +44,7 @@ namespace EmployeeProblemFull
         }
         public void GetWage()
         {
-            for (int i = 0; i < numOfCompanies; i++)
+            for (int i = 0; i < companyList.Count; i++)
                 companyList[i].SetEmpWage(ComputeWage(companyList[i]));
         }
         public int ComputeWage(Company company)

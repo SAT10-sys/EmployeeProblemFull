@@ -8,9 +8,9 @@ namespace EmployeeProblemFull
         {
             Console.WriteLine("Welcome to Employee Wage Management Problem");
             EmployeeOperations employeeOperations = new EmployeeOperations();
-            employeeOperations.AddCompanyToArray("Reliance", 20, 25, 100);
-            employeeOperations.AddCompanyToArray("Tata", 25, 30, 120);
-            employeeOperations.AddCompanyToArray("Adani", 20, 20, 140);
+            employeeOperations.AddCompanyToList("Reliance", 20, 25, 100);
+            employeeOperations.AddCompanyToList("Tata", 25, 30, 120);
+            employeeOperations.AddCompanyToList("Adani", 20, 20, 140);
             employeeOperations.GetWage();
         }
     }
