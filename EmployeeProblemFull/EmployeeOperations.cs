@@ -8,6 +8,24 @@ namespace EmployeeProblemFull
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
+        string companyName;
+        int wagePerHour;
+        int numOfWorkingDays;
+        int maximumWorkingHours;
+        public EmployeeOperations()
+        {
+            companyName = "";
+            wagePerHour = 0;
+            numOfWorkingDays = 0;
+            maximumWorkingHours = 0;
+        }
+        public EmployeeOperations(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours)
+        {
+            this.companyName = companyName;
+            this.wagePerHour = wagePerHour;
+            this.numOfWorkingDays = numOfWorkingDays;
+            this.maximumWorkingHours = maximumWorkingHours;
+        }
         public int GetEmployeeHours()
         {
             Random random = new Random();
@@ -31,7 +49,7 @@ namespace EmployeeProblemFull
             }
             return empHrs;
         }
-        public void ComputeWage(string companyName, int wagePerHour, int numOfWorkingDays, int maximumWorkingHours)
+        public void ComputeWage()
         {
             int empWage = 0;
             int totalEmpHours = 0;
