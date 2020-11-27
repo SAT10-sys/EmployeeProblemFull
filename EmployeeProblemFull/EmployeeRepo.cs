@@ -120,6 +120,7 @@ namespace EmployeeProblemFull
         }
         public void GetEmployeesInADateRange(DateTime date1, DateTime date2)
         {
+            int i = 0;
             try
             {
                 using (this.connection)
@@ -148,6 +149,7 @@ namespace EmployeeProblemFull
                             employeeModel.NetPay = dr.GetDecimal(11);
                             Console.WriteLine(employeeModel.EmployeeId + " " + employeeModel.EmployeeName + " " + employeeModel.BasicPay + " " + employeeModel.StartDate + " " + employeeModel.Gender + " " + employeeModel.PhoneNumber + " " + employeeModel.Address + " " + employeeModel.Department + " " + employeeModel.Deductions + " " + employeeModel.TaxablePay + " " + employeeModel.IncomeTax + " " + employeeModel.NetPay);
                             Console.WriteLine("\n");
+                            i++;
                         }
                     }
                     else
@@ -161,7 +163,7 @@ namespace EmployeeProblemFull
             finally
             {
                 this.connection.Close();
-            }        
+            }     
         }
     }
 }

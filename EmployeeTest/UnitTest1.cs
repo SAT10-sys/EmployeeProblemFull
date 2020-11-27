@@ -14,6 +14,6 @@ namespace EmployeeTest
             decimal salary = 750000;
             bool result = employeeRepo.UpdateSalary(name, salary);
             Assert.AreEqual(result, true);
-        }
+        }       
     }
 }
