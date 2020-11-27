@@ -33,7 +33,8 @@ namespace EmployeeProblemFull
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-            }            
+            }
+            Console.ReadKey();
         }
         public int GetEmployeeHours()
         {
