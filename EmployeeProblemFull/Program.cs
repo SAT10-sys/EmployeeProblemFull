@@ -8,8 +8,8 @@ namespace EmployeeProblemFull
         {
             Console.WriteLine("Welcome to Employee Problem");
             RegStart:
-            Console.WriteLine("Enter a choice between 1 and 4");
-            Console.WriteLine("1.RETRIEVE FROM DATABASE\n2.ADD NEW EMPLOYEE TO DATABASE\n3.UPDATE SALARY IN THE DATABASE\n4.GET EMPLOYEES JOINED IN A DATE RANGE");
+            Console.WriteLine("Enter a choice between 1 and 5");
+            Console.WriteLine("1.RETRIEVE FROM DATABASE\n2.ADD NEW EMPLOYEE TO DATABASE\n3.UPDATE SALARY IN THE DATABASE\n4.GET EMPLOYEES JOINED IN A DATE RANGE\n5.GET AGGREGATE SALARY DETAILS");
             int choice = Convert.ToInt32(Console.ReadLine());
             EmployeeRepo employeeRepo = new EmployeeRepo();
             switch(choice)
@@ -52,8 +52,12 @@ namespace EmployeeProblemFull
                     Console.WriteLine("List of employees joined in the given date range and their details:- ");
                     employeeRepo.GetEmployeesInADateRange(date1, date2);
                     break;
+                case 5:
+                    Console.WriteLine("Printing details");
+                    employeeRepo.GetAggregateSalaryDetails();
+                    break;
                 default:
-                    Console.WriteLine("Invalid choice. Enter choice between 1 and 4");
+                    Console.WriteLine("Invalid choice. Enter choice between 1 and 5");
                     goto RegStart;
             }
         }
