@@ -19,3 +19,16 @@ insert into EmployeePayroll values
 @EmployeeName, @BasicPay, @StartDate, @Gender, @PhoneNumber, @Address, @Department, @Deductions, @TaxableIncome, @IncomeTax, @NetPay
 )
 end
+
+
+go
+create procedure GetEmployeesInDateRange
+(
+@StartDate1 date,
+@StartDate2 date
+)
+as 
+begin
+select id, name, basicPay, startDate, gender, phoneNumber, address, department, deductions, taxablePay, incometax, netPay from EmployeePayroll where startDate between @StartDate1 and @StartDate2;
+end
+
