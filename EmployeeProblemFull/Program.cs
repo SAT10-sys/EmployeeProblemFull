@@ -6,23 +6,49 @@ namespace EmployeeProblemFull
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Employee Wage Management Problem");
-            /*EmployeeOperations employeeOperations = new EmployeeOperations();
-            employeeOperations.AddCompanyToList("Reliance", 20, 25, 100);
-            employeeOperations.AddCompanyToList("Tata", 25, 30, 120);
-            employeeOperations.AddCompanyToList("Adani", 20, 20, 140);
-            employeeOperations.GetWage();
-            Console.WriteLine("Enter name of company to find wage");
-            string companyName = Console.ReadLine();
-            Console.WriteLine("Wage of " + companyName + " is ");
-            employeeOperations.GetWagesByCompany(companyName);*/
-            Console.WriteLine("Retrieving all employees from the database");
+            Console.WriteLine("Welcome to Employee Problem");
+            RegStart:
+            Console.WriteLine("Enter a choice between 1 and 3");
+            Console.WriteLine("1.RETRIEVE FROM DATABASE\n2.ADD NEW EMPLOYEE TO DATABASE\n3.UPDATE SALARY IN THE DATABASE");
+            int choice = Convert.ToInt32(Console.ReadLine());
             EmployeeRepo employeeRepo = new EmployeeRepo();
-            //employeeRepo.RetrieveFromDataBase();
-            Console.WriteLine("Enter name and salary");
-            string name = Console.ReadLine();
-            decimal salary = Convert.ToDecimal(Console.ReadLine());
-            employeeRepo.UpdateSalary(name, salary);
+            switch(choice)
+            {
+                case 1:
+                    Console.WriteLine("Retrieving values");
+                    employeeRepo.RetrieveFromDataBase();
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the following details seperated by comma");
+                    Console.WriteLine("Name, BasicPay, StartDate(in DD/MM/YYYY), Gender, Phone Number, Address, Department, Deductions, Taxable Pay, Income Tax, NetPay");
+                    string[] detailsOfEmployee = Console.ReadLine().Split(",");
+                    EmployeeDetails employee = new EmployeeDetails();
+                    employee.EmployeeName = detailsOfEmployee[0];
+                    employee.BasicPay = Convert.ToDecimal(detailsOfEmployee[1]);
+                    employee.StartDate = Convert.ToDateTime(detailsOfEmployee[2]);
+                    employee.Gender = Convert.ToChar(detailsOfEmployee[3]);
+                    employee.PhoneNumber = detailsOfEmployee[4];
+                    employee.Address = detailsOfEmployee[5];
+                    employee.Department = detailsOfEmployee[6];
+                    employee.Deductions = Convert.ToDecimal(detailsOfEmployee[7]);
+                    employee.TaxablePay = Convert.ToDecimal(detailsOfEmployee[8]);
+                    employee.IncomeTax = Convert.ToDecimal(detailsOfEmployee[9]);
+                    employee.NetPay = Convert.ToDecimal(detailsOfEmployee[10]);
+                    employeeRepo.AddEmployee(employee);
+                    Console.WriteLine("Employee added successfully");
+                    break;
+                case 3:
+                    Console.WriteLine("Enter name of the employee whose salary is to be updated");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Enter new salary");
+                    decimal salary = Convert.ToDecimal(Console.ReadLine());
+                    employeeRepo.UpdateSalary(name, salary);
+                    Console.WriteLine("Salary updated");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Enter choice between 1 and 3");
+                    goto RegStart;
+            }
         }
     }
 }

@@ -53,6 +53,43 @@ namespace EmployeeProblemFull
                 this.connection.Close();
             }
         }
+        public bool AddEmployee(EmployeeDetails employee)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand cmd = new SqlCommand("SpAddEmployeeDetails", this.connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EmployeeName", employee.EmployeeName);
+                    cmd.Parameters.AddWithValue("@BasicPay", employee.BasicPay);
+                    cmd.Parameters.AddWithValue("@StartDate", employee.StartDate);
+                    cmd.Parameters.AddWithValue("@Gender", employee.Gender);
+                    cmd.Parameters.AddWithValue("@PhoneNumber", employee.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@Address", employee.Address);
+                    cmd.Parameters.AddWithValue("@Department", employee.Department);
+                    cmd.Parameters.AddWithValue("@Deductions",employee.Deductions);
+                    cmd.Parameters.AddWithValue("@TaxableIncome", employee.TaxablePay);
+                    cmd.Parameters.AddWithValue("@IncomeTax", employee.IncomeTax);
+                    cmd.Parameters.AddWithValue("@NetPay", employee.NetPay);
+                    this.connection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    if (result != 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+            return false;
+        }
         public bool UpdateSalary(string name, decimal salary)
         {
             try
