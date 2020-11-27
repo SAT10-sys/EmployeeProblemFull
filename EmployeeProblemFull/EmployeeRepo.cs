@@ -118,5 +118,33 @@ namespace EmployeeProblemFull
             }
             return false;
         }
+        public bool GetEmployeesInADateRange(string date1, string date2)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand cmd = new SqlCommand("SpGetEmployeesInDateRange", this.connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@StartDate1", date1);
+                    cmd.Parameters.AddWithValue("@StartDate2", date2);
+                    this.connection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    if (result != 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+            return false;
+        }
     }
 }
