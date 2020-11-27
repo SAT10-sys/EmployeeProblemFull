@@ -10,8 +10,8 @@ namespace EmployeeTest
         public void OnEnteringNameAndSalaryShouldReturnTrueAfterUpdation()
         {
             EmployeeRepo employeeRepo = new EmployeeRepo();
-            string name = "David";
-            decimal salary = 800000;
+            string name = "Kate";
+            decimal salary = 750000;
             bool result = employeeRepo.UpdateSalary(name, salary);
             Assert.AreEqual(result, true);
         }

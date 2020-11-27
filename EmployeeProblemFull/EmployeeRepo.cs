@@ -95,9 +95,11 @@ namespace EmployeeProblemFull
             try
             {
                 using (this.connection)
-                {
-                    string query = @"Update EmployeePayroll set basicPay= " + salary + " where name ='" + name + "';";
-                    SqlCommand cmd = new SqlCommand(query, this.connection);
+                {                
+                    SqlCommand cmd = new SqlCommand("SpUpdateSalary", this.connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EmployeeName", name);
+                    cmd.Parameters.AddWithValue("@BasicPay", salary);
                     this.connection.Open();
                     var result = cmd.ExecuteNonQuery();
                     if (result != 0)
