@@ -53,5 +53,31 @@ namespace EmployeeProblemFull
                 this.connection.Close();
             }
         }
+        public bool UpdateSalary(string name, decimal salary)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    string query = @"Update EmployeePayroll set basicPay= " + salary + " where name ='" + name + "';";
+                    SqlCommand cmd = new SqlCommand(query, this.connection);
+                    this.connection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    if (result != 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+            return false;
+        }
     }
 }

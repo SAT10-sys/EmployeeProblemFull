@@ -18,7 +18,11 @@ namespace EmployeeProblemFull
             employeeOperations.GetWagesByCompany(companyName);*/
             Console.WriteLine("Retrieving all employees from the database");
             EmployeeRepo employeeRepo = new EmployeeRepo();
-            employeeRepo.RetrieveFromDataBase();
+            //employeeRepo.RetrieveFromDataBase();
+            Console.WriteLine("Enter name and salary");
+            string name = Console.ReadLine();
+            decimal salary = Convert.ToDecimal(Console.ReadLine());
+            employeeRepo.UpdateSalary(name, salary);
         }
     }
 }
