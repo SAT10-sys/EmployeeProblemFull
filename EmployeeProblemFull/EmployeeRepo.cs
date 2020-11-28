@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace EmployeeProblemFull
 {
@@ -10,7 +11,7 @@ namespace EmployeeProblemFull
         public static string connectionString = @"Data Source=.;Initial Catalog=EmployeePayrollFull;Integrated Security=True";
         SqlConnection connection = new SqlConnection(connectionString);
         EmployeeDetails employeeModel = new EmployeeDetails();
-        List<EmployeeDetails> employeeList;
+        List<EmployeeDetails> employeeList=new List<EmployeeDetails>();
         public void RetrieveFromDataBase()
         {
             try
@@ -84,8 +85,10 @@ namespace EmployeeProblemFull
                     cmd.Parameters.AddWithValue("@TaxableIncome", employee.TaxablePay);
                     cmd.Parameters.AddWithValue("@IncomeTax", employee.IncomeTax);
                     cmd.Parameters.AddWithValue("@NetPay", employee.NetPay);
+                    cmd.Parameters.Add("@EmpId", SqlDbType.Int).Direction = ParameterDirection.Output;
                     this.connection.Open();
                     var result = cmd.ExecuteNonQuery();
+                    employee.EmployeeId = Convert.ToInt32(cmd.Parameters["@EmpId"].Value);
                     if (result != 0)
                         return true;
                     else
