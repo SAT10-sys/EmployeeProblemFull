@@ -10,6 +10,7 @@ namespace EmployeeProblemFull
         public static string connectionString = @"Data Source=.;Initial Catalog=EmployeePayrollFull;Integrated Security=True";
         SqlConnection connection = new SqlConnection(connectionString);
         EmployeeDetails employeeModel = new EmployeeDetails();
+        List<EmployeeDetails> employeeList;
         public void RetrieveFromDataBase()
         {
             try
@@ -53,6 +54,17 @@ namespace EmployeeProblemFull
                 this.connection.Close();
             }
         }
+        public int AddMultipleEmployee(List<EmployeeDetails> employeeList)
+        {
+            int count = 0;
+            employeeList.ForEach(employee =>
+            {
+                count++;
+                AddEmployee(employee);
+            }
+            );
+            return count;
+        }
         public bool AddEmployee(EmployeeDetails employee)
         {
             try
@@ -89,7 +101,7 @@ namespace EmployeeProblemFull
                 this.connection.Close();
             }
             return false;
-        }
+        }      
         public bool UpdateSalary(string name, decimal salary)
         {
             try

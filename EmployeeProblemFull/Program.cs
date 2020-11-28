@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EmployeeProblemFull
 {
@@ -6,6 +7,7 @@ namespace EmployeeProblemFull
     {
         static void Main(string[] args)
         {
+            List<EmployeeDetails> empList = new List<EmployeeDetails>();
             Console.WriteLine("Welcome to Employee Problem");
             RegStart:
             Console.WriteLine("Enter a choice between 1 and 5");
@@ -19,23 +21,30 @@ namespace EmployeeProblemFull
                     employeeRepo.RetrieveFromDataBase();
                     break;
                 case 2:
-                    Console.WriteLine("Enter the following details seperated by comma");
-                    Console.WriteLine("Name, BasicPay, StartDate(in DD/MM/YYYY), Gender, Phone Number, Address, Department, Deductions, Taxable Pay, Income Tax, NetPay");
-                    string[] detailsOfEmployee = Console.ReadLine().Split(",");
-                    EmployeeDetails employee = new EmployeeDetails();
-                    employee.EmployeeName = detailsOfEmployee[0];
-                    employee.BasicPay = Convert.ToDecimal(detailsOfEmployee[1]);
-                    employee.StartDate = Convert.ToDateTime(detailsOfEmployee[2]);
-                    employee.Gender = Convert.ToChar(detailsOfEmployee[3]);
-                    employee.PhoneNumber = detailsOfEmployee[4];
-                    employee.Address = detailsOfEmployee[5];
-                    employee.Department = detailsOfEmployee[6];
-                    employee.Deductions = Convert.ToDecimal(detailsOfEmployee[7]);
-                    employee.TaxablePay = Convert.ToDecimal(detailsOfEmployee[8]);
-                    employee.IncomeTax = Convert.ToDecimal(detailsOfEmployee[9]);
-                    employee.NetPay = Convert.ToDecimal(detailsOfEmployee[10]);
-                    employeeRepo.AddEmployee(employee);
-                    Console.WriteLine("Employee added successfully");
+                    while (true)
+                    {
+                        Console.WriteLine("Enter the following details seperated by comma");
+                        Console.WriteLine("Name, BasicPay, StartDate(in DD/MM/YYYY), Gender, Phone Number, Address, Department");
+                        string[] detailsOfEmployee = Console.ReadLine().Split(",");
+                        EmployeeDetails employee = new EmployeeDetails();
+                        employee.EmployeeName = detailsOfEmployee[0];
+                        employee.BasicPay = Convert.ToDecimal(detailsOfEmployee[1]);
+                        employee.StartDate = Convert.ToDateTime(detailsOfEmployee[2]);
+                        employee.Gender = Convert.ToChar(detailsOfEmployee[3]);
+                        employee.PhoneNumber = detailsOfEmployee[4];
+                        employee.Address = detailsOfEmployee[5];
+                        employee.Department = detailsOfEmployee[6];
+                        employee.Deductions = 0.2M * employee.BasicPay;
+                        employee.TaxablePay = employee.BasicPay - employee.Deductions;
+                        employee.IncomeTax = 0.1M * employee.TaxablePay;
+                        employee.NetPay = employee.BasicPay - employee.IncomeTax;
+                        empList.Add(employee);
+                        Console.WriteLine("Do You want to add more employees:- Yes/No");
+                        string answer = Console.ReadLine();
+                        if (answer.ToUpper() == "NO")
+                            break;                        
+                    }
+                    employeeRepo.AddMultipleEmployee(empList);
                     break;
                 case 3:
                     Console.WriteLine("Enter name of the employee whose salary is to be updated");
